@@ -12,7 +12,7 @@ module Wicked
       helper_method :wizard_path,     :next_wizard_path, :previous_wizard_path,
                     :step,            :wizard_steps,     :current_step?,
                     :past_step?,      :future_step?,     :previous_step?,
-                    :next_step?
+                    :next_step?, :update_wizard_path
       # Set @step and @next_step variables
       before_filter :setup_wizard
     end
@@ -56,7 +56,7 @@ module Wicked
     end
 
     def setup_wizard
-      @step = setup_step_from(params[:id])
+      @step = setup_step_from(params[Wicked::STEP_PARAM])
       check_steps!(@step)
       set_previous_next(@step)
     end
